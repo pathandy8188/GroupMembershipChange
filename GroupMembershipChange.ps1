@@ -2,7 +2,7 @@
 $Groupfile = "C:\scripts\$GroupName.txt"
 $Groupfilenew = "C:\scripts\$GroupName-new.txt"
 $date=Get-Date -Format F
-$smtpserver = "mail.smtp2go.com"
+$smtpserver = "smtpserver"
 $fromemail = "alerts@domainname.com"
 $toemail = "rcptname@domainname.com"
 #check if Groupfile exists, if not create one
