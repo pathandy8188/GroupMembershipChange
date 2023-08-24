@@ -29,7 +29,7 @@ foreach ($GroupName in $GroupNames){
   <p>This alert was generated at $date</p>
   <p>$resultadd was added to the group $GroupName<br /> 
   </font>"
-  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port 2525 -Subject "$GroupName Membership Changed | $result was added to the Group $GroupName" -Body $body -BodyAsHtml -Priority High
+  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port 2525 -Subject "$GroupName Membership Changed | $resultadd was added to the Group $GroupName" -Body $body -BodyAsHtml -Priority High
   (Get-ADGroupMember -Identity $GroupName).Name | Out-File $Groupfile
   } End if resultadd
   #Compare to see if member was removed
@@ -40,7 +40,7 @@ foreach ($GroupName in $GroupNames){
   <p>This alert was generated at $date</p>
   <p>$resultremove was removed from the group $GroupName<br /> 
   </font>"
-  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port 2525 -Subject "$Groupname Membership Changed | $result was removed from the Group $GroupName" -Body $body -BodyAsHtml -Priority High
+  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port 2525 -Subject "$Groupname Membership Changed | $resultremove was removed from the Group $GroupName" -Body $body -BodyAsHtml -Priority High
   #Set new Group Members to compare
   (Get-ADGroupMember -Identity $GroupName).Name | Out-File $Groupfile
   } #endif Resultremove
