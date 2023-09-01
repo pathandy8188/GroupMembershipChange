@@ -5,6 +5,7 @@ foreach ($GroupName in $GroupNames){
   $Groupfilenew = "C:\scripts\$GroupName-new.txt"
   $date=Get-Date -Format F
   $smtpserver = "mail.smtp2go.com"
+  $port = 2525
   $fromemail = "alerts@domainname.com"
   $toemail = "rcptname@domainname.com"
   #check if Groupfile exists, if not create one
@@ -29,7 +30,8 @@ foreach ($GroupName in $GroupNames){
   <p>This alert was generated at $date</p>
   <p>$resultadd was added to the group $GroupName<br /> 
   </font>"
-  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port 2525 -Subject "$GroupName Membership Changed | $resultadd was added to the Group $GroupName" -Body $body -BodyAsHtml -Priority High
+  $subject = "$GroupName Membership Changed | $resultadd was added to the Group $GroupName"
+  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port $port -Subject $subject -Body $body -BodyAsHtml -Priority High
   (Get-ADGroupMember -Identity $GroupName).Name | Out-File $Groupfile
   } End if resultadd
   #Compare to see if member was removed
@@ -40,7 +42,8 @@ foreach ($GroupName in $GroupNames){
   <p>This alert was generated at $date</p>
   <p>$resultremove was removed from the group $GroupName<br /> 
   </font>"
-  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port 2525 -Subject "$Groupname Membership Changed | $resultremove was removed from the Group $GroupName" -Body $body -BodyAsHtml -Priority High
+  $subject = "$Groupname Membership Changed | $resultremove was removed from the Group $GroupName" 
+  Send-MailMessage -From $fromemail -To $toemail -SmtpServer $smtpserver -port $port -Subject $subeject -Body $body -BodyAsHtml -Priority High
   #Set new Group Members to compare
   (Get-ADGroupMember -Identity $GroupName).Name | Out-File $Groupfile
   } #endif Resultremove
